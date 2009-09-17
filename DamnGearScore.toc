@@ -3,5 +3,11 @@
 ## Notes: Fakes GearScore numbers
 ## Author: Shadowed
 
+libs\LibStub-1.0\LibStub-1.0.xml
+libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+libs\AceGUI-3.0\AceGUI-3.0.xml
+libs\AceConfig-3.0\AceConfig-3.0.xml
+
 data.lua
+items.lua
 DamnGearScore.lua
