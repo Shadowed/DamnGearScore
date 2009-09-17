@@ -5,7 +5,6 @@ local itemSet, setData = {}, {}
 
 DGSData:Load(DGS)
 
-
 function DGS:CHAT_MSG_ADDON(prefix, message, channel, sender)
 	if( string.match(prefix, "GearScore") or string.match(prefix, "^GSY") ) then
 		print(string.format("[%s] [%s] from [%s] (%s)", prefix, message, sender, channel))
@@ -119,40 +118,4 @@ end)
 
 function DGS:Print(msg)
 	DEFAULT_CHAT_FRAME:AddMessage("|cff33ff99DGS|r: " .. msg)
-end
-
--- Slash commands
-SLASH_DGS1 = "/damngearscore"
-SLASH_DGS2 = "/dgs"
-SLASH_DGS3 = "/damngear"
-SlashCmdList["DGS"] = function(msg)
-	local self = DGS
-	local cmd, arg = string.split(" ", msg, 2)
-	cmd = string.lower(cmd or "")
-	
-	if( cmd == "score" and tonumber(arg) 	) then
-		local level = tonumber(arg)
-		DGS:CreateItemSet(level)
-		
-		self:Print(string.format("Target item level %d gets you a GearScore of %d.", level, setData.total))
-	elseif( cmd == "fake" and arg ) then
-		local level, nameFor, nameFrom, race, class, level, guild = string.split(" ", arg, 7)
-		level = tonumber(level)
-		nameFor = nameFor and nameFor ~= "" and nameFor or playerName
-		nameFrom = nameFrom and nameFrom ~= "" and nameFrom or playerName
-		
-		if( not level ) then
-			self:Print("Invalid item level entered.")
-			return
-		end
-		
-		DGS:CreateItemSet(level)
-		DGS:FakeGearData(setData.average, setData.total, nameFor, nameFrom, race, class, level, guild)
-				
-		self:Print(string.format("Sent GearScore of %d (target item level %d) for %s, shown as from %s.", setData.total, level, nameFor, nameFrom))
-	else
-		self:Print("Slash commands")
-		print("/dgs score <itemLevel> - Figures out an item set that will match (roughly) the given item level")
-		print("/dgs fake <itemLevel> <dataFor> <dataFrom> <race> <class> <level> <guild> - Creates a fake gearscore data using the given fields, <itemLevel> is required, everything else will default to players data if none are passed. Do not put a space in the race or class name.")
-	end
 end
