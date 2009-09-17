@@ -1,0 +1,7 @@
+## Interface: 30200
+## Title: Damn Gear Score
+## Notes: Fakes GearScore numbers
+## Author: Shadowed
+
+data.lua
+DamnGearScore.lua
